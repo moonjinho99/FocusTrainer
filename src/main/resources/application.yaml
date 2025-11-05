@@ -1,3 +1,5 @@
 spring:
   application:
     name: focustrainer
+  profiles:
+    active: dev
