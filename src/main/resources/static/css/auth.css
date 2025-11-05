@@ -1,0 +1,80 @@
+/* 전체 레이아웃 */
+body {
+  font-family: "Noto Sans KR", sans-serif;
+  background: linear-gradient(135deg, #2c3e50, #4ca1af);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+/* 폼 박스 */
+.container {
+  width: 100%;
+  max-width: 400px;
+}
+
+.form-box {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 40px 30px;
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 25px;
+  color: #333;
+}
+
+/* 인풋 스타일 */
+input {
+  width: 100%;
+  padding: 12px 10px;
+  margin: 8px 0 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  transition: 0.2s;
+}
+
+input:focus {
+  border-color: #4ca1af;
+  outline: none;
+  box-shadow: 0 0 4px rgba(76, 161, 175, 0.4);
+}
+
+/* 버튼 */
+button {
+  width: 100%;
+  background: #4ca1af;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #357f88;
+}
+
+/* 링크 텍스트 */
+.redirect-text {
+  margin-top: 20px;
+  color: #555;
+  font-size: 14px;
+}
+
+.redirect-text a {
+  color: #4ca1af;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.redirect-text a:hover {
+  text-decoration: underline;
+}

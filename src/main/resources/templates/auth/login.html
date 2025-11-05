@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>로그인 | FocusTrainer</title>
+    <link rel="stylesheet" th:href="@{/css/auth.css}">
+</head>
+<body>
+<div class="container">
+    <div class="form-box">
+        <h2>로그인</h2>
+        <form method="post" action="/api/auth/login">
+            <input type="email" name="email" placeholder="이메일" required>
+            <input type="password" name="password" placeholder="비밀번호" required>
+            <button type="submit">로그인</button>
+        </form>
+        <p class="redirect-text">
+            아직 회원이 아니신가요?
+            <a th:href="@{/auth/signup}">회원가입</a>
+        </p>
+    </div>
+</div>
+</body>
+</html>
