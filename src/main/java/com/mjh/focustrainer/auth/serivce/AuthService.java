@@ -1,9 +1,15 @@
 package com.mjh.focustrainer.auth.serivce;
 
+import com.mjh.focustrainer.auth.dto.SignupRequest;
+import com.mjh.focustrainer.auth.repository.UserRepository;
 import com.mjh.focustrainer.common.response.ApiResponse;
+import com.mjh.focustrainer.common.response.ErrorCode;
+import com.mjh.focustrainer.exception.CustomException;
+import com.mjh.focustrainer.user.entity.User;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -15,7 +21,8 @@ public class AuthService {
 
     private final MailService mailService;
     private final Map<String, String> codeStorage = new ConcurrentHashMap<>();
-
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public ResponseEntity<ApiResponse<Void>> sendMail(String email) throws MessagingException
     {
@@ -34,4 +41,21 @@ public class AuthService {
         }
     }
 
+    public void signup(SignupRequest request)
+    {
+        // 이메일 중복 검사
+        if(userRepository.existsByEmail(request.getEmail())) {
+            throw new CustomException(ErrorCode.EMAIL_ALREADY_EXISTS);
+        }
+
+        String encodedPassword = passwordEncoder.encode(request.getPassword());
+
+        User user = User.builder()
+                .email(request.getEmail())
+                .password(encodedPassword)
+                .nickname(request.getNickname())
+                .build();
+
+        userRepository.save(user);
+    }
 }

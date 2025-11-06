@@ -6,6 +6,7 @@ import com.mjh.focustrainer.auth.dto.EmailRequest;
 import com.mjh.focustrainer.auth.dto.SignupRequest;
 import com.mjh.focustrainer.auth.serivce.AuthService;
 import com.mjh.focustrainer.auth.serivce.MailService;
+import com.mjh.focustrainer.common.response.ApiResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.mail.MessagingException;
@@ -41,6 +42,14 @@ public class AuthController {
         String email = request.getEmail();
         String code = request.getCode();
         return authService.codeCheck(email,code);
+    }
+
+    @Operation(summary = "회원가입", description = "사용자의 닉네임, 이메일로 회원가입을 진행합니다.")
+    @PostMapping("/signup")
+    public ResponseEntity<ApiResponse<Void>> signup(@Valid @RequestBody SignupRequest request)
+    {
+        authService.signup(request);
+        return ResponseEntity.ok(ApiResponse.ok("회원가입이 완료되었습니다."));
     }
 
 }

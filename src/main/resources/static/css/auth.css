@@ -46,7 +46,7 @@ input:focus {
 }
 
 /* 버튼 */
-#signupBtn {
+#signupBtn, #loginBtn {
   width: 100%;
   background: #4ca1af;
   color: white;

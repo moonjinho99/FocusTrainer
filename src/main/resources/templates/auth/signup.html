@@ -10,7 +10,7 @@
     <div class="form-box">
         <h2>회원가입</h2>
 
-        <form id="signupForm" method="post" action="/api/auth/signup" onsubmit="return validateBeforeSubmit()">
+        <form id="signupForm" onsubmit="return signup(event)">
             <input type="text" name="nickname" placeholder="닉네임" required>
 
             <div class="email-group">
@@ -31,6 +31,7 @@
                 <a th:href="@{/auth/login}">로그인</a>
             </p>
         </form>
+
     </div>
 </div>
 

@@ -63,3 +63,40 @@ function validateBeforeSubmit() {
   }
   return true;
 }
+
+//회원가입
+function signup(e) {
+  e.preventDefault(); // 기본 폼 제출 막기
+
+  const email = document.getElementById('email').value.trim();
+  const password = document.querySelector('[name=password]').value.trim();
+  const nickname = document.querySelector('[name=nickname]').value.trim();
+
+  if (!email || !password || !nickname) {
+    alert('모든 필드를 입력하세요.');
+    return;
+  }
+
+  if (!verified) {
+    alert('이메일 인증을 완료해야 합니다.');
+    return;
+  }
+
+  const data = { email, password, nickname };
+
+  fetch('/api/auth/signup', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  })
+    .then(res => res.json())
+    .then(resp => {
+      if (resp.success) {
+        alert('회원가입이 완료되었습니다.');
+        window.location.href = '/auth/login';
+      } else {
+        alert(resp.message || '회원가입 실패');
+      }
+    })
+    .catch(() => alert('서버 오류가 발생했습니다.'));
+}
