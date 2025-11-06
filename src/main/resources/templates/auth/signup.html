@@ -9,17 +9,31 @@
 <div class="container">
     <div class="form-box">
         <h2>회원가입</h2>
-        <form method="post" action="/api/auth/signup">
+
+        <form id="signupForm" method="post" action="/api/auth/signup" onsubmit="return validateBeforeSubmit()">
             <input type="text" name="nickname" placeholder="닉네임" required>
-            <input type="email" name="email" placeholder="이메일" required>
+
+            <div class="email-group">
+                <input type="email" id="email" name="email" placeholder="이메일" required>
+                <button type="button" id="sendMailBtn" onclick="sendMail()">인증메일 보내기</button>
+            </div>
+
+            <div class="verify-group" id="verifySection" style="display:none;">
+                <input type="text" id="verifyCode" placeholder="인증번호 입력">
+                <button type="button" id="checkCodeBtn" onclick="codeCheck()">확인</button>
+            </div>
+
             <input type="password" name="password" placeholder="비밀번호" required>
-            <button type="submit">회원가입</button>
+            <button type="submit" id="signupBtn">회원가입</button>
+
+            <p class="redirect-text">
+                이미 계정이 있으신가요?
+                <a th:href="@{/auth/login}">로그인</a>
+            </p>
         </form>
-        <p class="redirect-text">
-            이미 계정이 있으신가요?
-            <a th:href="@{/auth/login}">로그인</a>
-        </p>
     </div>
 </div>
+
+<script th:src="@{/js/signup.js}"></script>
 </body>
 </html>

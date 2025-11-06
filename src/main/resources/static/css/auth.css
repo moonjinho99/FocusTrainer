@@ -46,7 +46,7 @@ input:focus {
 }
 
 /* 버튼 */
-button {
+#signupBtn {
   width: 100%;
   background: #4ca1af;
   color: white;
@@ -78,3 +78,37 @@ button:hover {
 .redirect-text a:hover {
   text-decoration: underline;
 }
+
+.email-group,
+.verify-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.email-group input,
+.verify-group input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.email-group button,
+.verify-group button {
+  padding: 10px 16px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap; /* 버튼이 줄바꿈되지 않도록 */
+}
+
+.email-group button:hover,
+.verify-group button:hover {
+  background-color: #0056b3;
+}
+
