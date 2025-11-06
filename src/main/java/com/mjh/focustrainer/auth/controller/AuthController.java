@@ -3,6 +3,7 @@ package com.mjh.focustrainer.auth.controller;
 
 import com.mjh.focustrainer.auth.dto.CodeRequest;
 import com.mjh.focustrainer.auth.dto.EmailRequest;
+import com.mjh.focustrainer.auth.dto.SignupRequest;
 import com.mjh.focustrainer.auth.serivce.AuthService;
 import com.mjh.focustrainer.auth.serivce.MailService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -35,10 +36,11 @@ public class AuthController {
 
     @Operation(summary = "이메일 인증번호 검증", description = "입력한 인증번호가 일치하는지 확인합니다.")
     @PostMapping("/code/check")
-    public ResponseEntity<?> codeCheck(@Valid @RequestBody CodeRequest request) throws MessagingException
+    public ResponseEntity<?> codeCheck(@Valid @RequestBody CodeRequest request)
     {
         String email = request.getEmail();
         String code = request.getCode();
         return authService.codeCheck(email,code);
     }
+
 }

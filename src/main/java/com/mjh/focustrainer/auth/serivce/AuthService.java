@@ -24,15 +24,14 @@ public class AuthService {
         return ResponseEntity.ok(ApiResponse.ok("메일 발송 완료"));
     }
 
-    public ResponseEntity<ApiResponse<Boolean>> codeCheck(String email,String code) throws MessagingException
+    public ResponseEntity<ApiResponse<Boolean>> codeCheck(String email,String code)
     {
         if(codeStorage.get(email).equals(code))
         {
             return ResponseEntity.ok(ApiResponse.ok("인증번호 검증 완료", true));
+        }else{
+            throw new IllegalArgumentException("인증번호 검증 실패");
         }
-
-        return ResponseEntity.ok(ApiResponse.ok("인증번호 검증 실패", false));
     }
-
 
 }
