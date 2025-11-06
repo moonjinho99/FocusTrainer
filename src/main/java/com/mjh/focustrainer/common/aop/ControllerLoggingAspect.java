@@ -1,4 +1,4 @@
-package com.mjh.focustrainer.aop;
+package com.mjh.focustrainer.common.aop;
 
 
 import lombok.extern.slf4j.Slf4j;

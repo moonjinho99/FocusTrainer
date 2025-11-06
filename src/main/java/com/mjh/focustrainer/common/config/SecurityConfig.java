@@ -1,4 +1,4 @@
-package com.mjh.focustrainer.config;
+package com.mjh.focustrainer.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

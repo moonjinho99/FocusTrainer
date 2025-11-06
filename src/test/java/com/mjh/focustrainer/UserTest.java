@@ -1,7 +1,7 @@
 package com.mjh.focustrainer;
 
 
-import com.mjh.focustrainer.auth.repository.UserRepository;
+import com.mjh.focustrainer.user.repository.UserRepository;
 import com.mjh.focustrainer.user.entity.User;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

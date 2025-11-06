@@ -1,4 +1,4 @@
-package com.mjh.focustrainer.exception;
+package com.mjh.focustrainer.common.exception;
 
 
 import com.mjh.focustrainer.common.response.ErrorCode;

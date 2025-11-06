@@ -3,6 +3,7 @@ package com.mjh.focustrainer.auth.controller;
 
 import com.mjh.focustrainer.auth.dto.CodeRequest;
 import com.mjh.focustrainer.auth.dto.EmailRequest;
+import com.mjh.focustrainer.auth.dto.LoginRequest;
 import com.mjh.focustrainer.auth.dto.SignupRequest;
 import com.mjh.focustrainer.auth.serivce.AuthService;
 import com.mjh.focustrainer.auth.serivce.MailService;
@@ -52,4 +53,11 @@ public class AuthController {
         return ResponseEntity.ok(ApiResponse.ok("회원가입이 완료되었습니다."));
     }
 
+
+    @Operation(summary = "로그인", description = "로그인을 진행합니다.")
+    @PostMapping("/login")
+    public ResponseEntity<ApiResponse<Map<String,String>>> login(@Valid @RequestBody LoginRequest request)
+    {
+        return ResponseEntity.ok(authService.login(request));
+    }
 }

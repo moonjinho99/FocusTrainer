@@ -1,4 +1,4 @@
-package com.mjh.focustrainer.config;
+package com.mjh.focustrainer.common.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;

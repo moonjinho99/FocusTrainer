@@ -1,28 +1,37 @@
 package com.mjh.focustrainer.auth.serivce;
 
+import com.mjh.focustrainer.auth.dto.LoginRequest;
 import com.mjh.focustrainer.auth.dto.SignupRequest;
-import com.mjh.focustrainer.auth.repository.UserRepository;
+import com.mjh.focustrainer.auth.entity.RefreshToken;
+import com.mjh.focustrainer.auth.repository.RefreshTokenRepository;
+import com.mjh.focustrainer.common.jwt.JwtProvider;
+import com.mjh.focustrainer.user.repository.UserRepository;
 import com.mjh.focustrainer.common.response.ApiResponse;
 import com.mjh.focustrainer.common.response.ErrorCode;
-import com.mjh.focustrainer.exception.CustomException;
+import com.mjh.focustrainer.common.exception.CustomException;
 import com.mjh.focustrainer.user.entity.User;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class AuthService {
 
     private final MailService mailService;
     private final Map<String, String> codeStorage = new ConcurrentHashMap<>();
     private final UserRepository userRepository;
+    private final RefreshTokenRepository refreshTokenRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtProvider jwtProvider;
 
     public ResponseEntity<ApiResponse<Void>> sendMail(String email) throws MessagingException
     {
@@ -57,5 +66,38 @@ public class AuthService {
                 .build();
 
         userRepository.save(user);
+    }
+
+    public ApiResponse<Map<String,String>> login(LoginRequest request) {
+
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+
+        if(!passwordEncoder.matches(request.getPassword(), user.getPassword())){
+            throw new CustomException(ErrorCode.INVALID_PASSWORD);
+        }
+
+        String accessToken = jwtProvider.generateAccessToken(user.getId(), user.getEmail());
+        String refreshToken = jwtProvider.generateRefreshToken(user.getId(), user.getEmail());
+
+        refreshTokenRepository.deleteByUser(user);
+
+        RefreshToken newToken = RefreshToken.builder()
+                .user(user)
+                .token(refreshToken)
+                .expireTime(
+                        jwtProvider.getExpiration(refreshToken)
+                                .toInstant()
+                                .atZone(java.time.ZoneId.systemDefault())
+                                .toLocalDateTime()
+                ).build();
+
+        refreshTokenRepository.save(newToken);
+
+        Map<String, String> tokens = new HashMap<>();
+        tokens.put("accessToken", accessToken);
+        tokens.put("refreshToken", refreshToken);
+
+        return ApiResponse.ok("로그인 성공", tokens);
     }
 }

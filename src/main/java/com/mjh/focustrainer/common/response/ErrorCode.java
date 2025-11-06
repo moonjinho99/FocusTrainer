@@ -11,6 +11,8 @@ public enum ErrorCode {
     MAIL_SEND_FAILED("2000", "메일 발송 중 오류가 발생했습니다."),
     VERIFICATION_FAILED("2001", "인증번호가 일치하지 않습니다."),
     EMAIL_ALREADY_EXISTS("2002", "이미 등록된 이메일입니다."),
+    USER_NOT_FOUND("2003", "존재하지 않는 사용자입니다."),
+    INVALID_PASSWORD("2004", "비밀번호가 일치하지 않습니다."),
 
     // 공통 오류 1000번대
     INVALID_REQUEST("1000", "요청 파라미터가 올바르지 않습니다."),
