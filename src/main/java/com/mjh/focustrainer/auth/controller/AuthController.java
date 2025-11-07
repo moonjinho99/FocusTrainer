@@ -11,9 +11,11 @@ import com.mjh.focustrainer.common.response.ApiResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.mail.MessagingException;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -59,5 +61,13 @@ public class AuthController {
     public ResponseEntity<ApiResponse<Map<String,String>>> login(@Valid @RequestBody LoginRequest request)
     {
         return ResponseEntity.ok(authService.login(request));
+    }
+
+    @Operation(summary = "로그아웃", description = "로그아웃을 진행합니다.")
+    @PostMapping("/logout")
+    public ResponseEntity<ApiResponse<Void>> logout(HttpServletRequest request)
+    {
+        authService.logout(request);
+        return ResponseEntity.ok(ApiResponse.ok("로그아웃 합니다."));
     }
 }

@@ -61,6 +61,10 @@ public class JwtProvider {
         return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
     }
 
+    public Long getUserId(String token) {
+        return getClaims(token).get("userId", Long.class);
+    }
+
     public Date getExpiration(String token) {
         return getClaims(token).getExpiration();
     }

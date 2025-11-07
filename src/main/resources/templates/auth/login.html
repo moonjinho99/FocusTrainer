@@ -4,12 +4,24 @@
     <meta charset="UTF-8">
     <title>로그인 | FocusTrainer</title>
     <link rel="stylesheet" th:href="@{/css/auth.css}">
+    <style>
+        .logo-container {
+            text-align: center;
+        }
+        .logo-container img {
+            width: 200px;
+            height: auto;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
-    <div class="form-box">
-        <h2>로그인</h2>
 
+    <div class="form-box">
+        <!-- ✅ 로고 영역 추가 -->
+        <div class="logo-container">
+            <img th:src="@{/img/focus-logo.png}" alt="FocusTrainer 로고">
+        </div>
         <form id="loginForm" onsubmit="return false;">
             <input type="email" id="email" name="email" placeholder="이메일" required>
             <input type="password" id="password" name="password" placeholder="비밀번호" required>

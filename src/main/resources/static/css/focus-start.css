@@ -1,0 +1,72 @@
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: #f8f9fa;
+  text-align: center;
+  margin: 0;
+  padding: 40px;
+}
+
+.container {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  display: inline-block;
+}
+
+video {
+  width: 420px;
+  height: 300px;
+  border-radius: 10px;
+  background: #000;
+}
+
+.primary-btn {
+  background-color: #4b7bec;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.secondary-btn {
+  background-color: #e0e0e0;
+  color: #333;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.timer-display {
+  font-size: 2rem;
+  margin: 20px 0;
+}
+
+.button-group {
+  margin-top: 20px;
+}
+
+#resultSection {
+  margin-top: 30px;
+  background: #f1f3f5;
+  border-radius: 8px;
+  padding: 15px;
+}
+
+#mainBtn.main-btn {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #0078ff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#mainBtn.main-btn:hover {
+  background-color: #005fcc;
+}

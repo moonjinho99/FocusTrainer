@@ -1,0 +1,101 @@
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+}
+
+/* 헤더 */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #007bff;
+  color: white;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-info button {
+  background: white;
+  color: #007bff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.user-info button:hover {
+  background: #e9ecef;
+}
+
+/* 메인 콘텐츠 */
+.main-content {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+#startBtn {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.2rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#startBtn:hover {
+  background-color: #0056b3;
+}
+
+/* 훈련 기록 리스트 */
+.record-list {
+  margin-top: 2rem;
+}
+
+.record-list h2 {
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.record-item {
+  background: white;
+  border-radius: 0.6rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-bottom: 1rem;
+  padding: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.record-item:hover {
+  background: #f1f1f1;
+}
+
+.record-detail {
+  margin-top: 0.5rem;
+  padding-left: 1rem;
+  color: #555;
+  font-size: 0.9rem;
+  display: none;
+}
+
+.record-detail.active {
+  display: block;
+}

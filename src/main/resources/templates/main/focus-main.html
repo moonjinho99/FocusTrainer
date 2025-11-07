@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>FocusTrainer | 메인</title>
+    <link rel="stylesheet" th:href="@{/css/focus.css}">
+</head>
+<body>
+
+<!-- ✅ 헤더 영역 -->
+<header class="header">
+    <div class="logo">FocusTrainer</div>
+    <div class="user-info">
+        <span id="userName">OOO님 안녕하세요!</span>
+        <button id="logoutBtn" onclick="logout()">로그아웃</button>
+    </div>
+</header>
+
+<!-- ✅ 메인 콘텐츠 -->
+<main class="main-content">
+    <button id="startBtn" onclick="startTraining()">훈련 시작</button>
+
+    <section class="record-list">
+        <h2>훈련 기록</h2>
+        <ul id="focusRecords">
+            <!-- JS에서 기록 목록을 렌더링 -->
+        </ul>
+    </section>
+</main>
+
+<script th:src="@{/js/focus.js}" defer></script>
+</body>
+</html>

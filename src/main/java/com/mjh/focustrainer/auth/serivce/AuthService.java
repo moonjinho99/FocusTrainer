@@ -11,8 +11,10 @@ import com.mjh.focustrainer.common.response.ErrorCode;
 import com.mjh.focustrainer.common.exception.CustomException;
 import com.mjh.focustrainer.user.entity.User;
 import jakarta.mail.MessagingException;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -97,7 +99,21 @@ public class AuthService {
         Map<String, String> tokens = new HashMap<>();
         tokens.put("accessToken", accessToken);
         tokens.put("refreshToken", refreshToken);
+        tokens.put("nickname",user.getNickname());
 
         return ApiResponse.ok("로그인 성공", tokens);
+    }
+
+    public void logout(HttpServletRequest request)
+    {
+        String header = request.getHeader("Authorization");
+        if (header == null || !header.startsWith("Bearer ")) {
+            throw new CustomException(ErrorCode.UNAUTHORIZED);
+        }
+
+        String token = header.substring(7);
+        Long userId = jwtProvider.getUserId(token);
+
+        refreshTokenRepository.deleteByUserId(userId);
     }
 }
