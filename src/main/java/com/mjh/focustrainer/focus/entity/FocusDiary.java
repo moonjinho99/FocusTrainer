@@ -21,6 +21,12 @@ public class FocusDiary {
 
     private String name;
 
-    @OneToMany(mappedBy = "diary", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<FocusDetail> details;
+    @OneToOne(mappedBy = "diary", cascade = CascadeType.ALL, orphanRemoval = true)
+    private FocusDetail detail;
+
+    // 편의 메서드 (양방향 연관관계 동기화)
+    public void setDetail(FocusDetail detail) {
+        this.detail = detail;
+        detail.setDiary(this);
+    }
 }

@@ -1,6 +1,7 @@
 package com.mjh.focustrainer.focus.entity;
 
 import jakarta.persistence.*;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.*;
 import java.time.LocalDateTime;
 
@@ -15,11 +16,17 @@ public class FocusDetail {
     private FocusDiary diary;
 
     @Column(name = "focus_percent")
-    private Integer focusPercent;
+    private Double focusPercent;
 
     @Column(name = "start_time")
     private LocalDateTime startTime;
 
     @Column(name = "end_time")
     private LocalDateTime endTime;
+
+    @Column(name = "total_second")
+    private Integer totalSecond;
+
+    @Column(name = "target_minute")
+    private Integer targetMinute;
 }

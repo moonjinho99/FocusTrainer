@@ -70,3 +70,57 @@ video {
 #mainBtn.main-btn:hover {
   background-color: #005fcc;
 }
+
+/* 결과 섹션 */
+#resultSection {
+  text-align: center;
+  margin-top: 30px;
+}
+
+#focusResult {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* 훈련명 입력 */
+.training-input {
+  width: 60%;
+  padding: 10px;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  text-align: center;
+}
+
+/* 버튼 그룹 */
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+/* 저장/메인 버튼 공통 스타일 */
+.action-btn {
+  padding: 10px 25px;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: white;
+  background-color: #2c7ef7;
+  transition: 0.2s ease;
+}
+
+.action-btn:hover {
+  background-color: #1d5fc1;
+}
+
+.action-btn:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}
+

@@ -30,7 +30,6 @@ public class AuthController {
     private final AuthService authService;
 
     @Operation(summary = "이메일 인증번호 발송", description = "입력한 이메일로 인증번호를 발송합니다.")
-
     @PostMapping("/mail/send")
     public ResponseEntity<?> sendMail(@Valid @RequestBody EmailRequest request) throws MessagingException
     {
