@@ -75,27 +75,33 @@ body {
 }
 
 .record-item {
-  background: white;
-  border-radius: 0.6rem;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  margin-bottom: 1rem;
-  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 10px;
+  background: #fff;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.2s;
 }
 
 .record-item:hover {
-  background: #f1f1f1;
+  background: #f9f9f9;
+}
+
+.record-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .record-detail {
-  margin-top: 0.5rem;
-  padding-left: 1rem;
-  color: #555;
-  font-size: 0.9rem;
+  margin-top: 8px;
   display: none;
+  font-size: 0.9em;
+  color: #444;
 }
 
 .record-detail.active {
   display: block;
 }
+

@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   loadFocusRecords();
 });
 
-// ✅ 훈련 기록 불러오기 (mock API 예시)
+// ✅ 훈련 기록 불러오기
 async function loadFocusRecords() {
   const list = document.getElementById("focusRecords");
   list.innerHTML = "";
@@ -21,29 +21,36 @@ async function loadFocusRecords() {
     if (!response.ok) throw new Error("기록 조회 실패");
 
     const data = await response.json();
-    const records = data.data || [];
+    const diaries = data.data || [];
 
-    if (records.length === 0) {
+    if (diaries.length === 0) {
       list.innerHTML = "<p>아직 훈련 기록이 없습니다.</p>";
       return;
     }
 
-    records.forEach(record => {
+    diaries.forEach(diary => {
+
       const li = document.createElement("li");
       li.classList.add("record-item");
       li.innerHTML = `
-        <div><strong>${record.name}</strong> (${record.date})</div>
+        <div class="record-summary">
+          <strong>${diary.name}</strong>
+          <span>${new Date(diary.createdAt).toLocaleDateString()}</span>
+        </div>
+
         <div class="record-detail">
-          <p>시작: ${record.start}</p>
-          <p>종료: ${record.end}</p>
-          <p>총 시간: ${record.total}</p>
-          <p>집중력: ${record.focusPercent}%</p>
+          <p>시작 시간: ${formatDate(diary.startTime)}</p>
+          <p>종료 시간: ${formatDate(diary.endTime)}</p>
+          <p>목표 시간: ${diary.targetMinute}분</p>
+          <p>총 훈련 시간: ${formatSeconds(diary.totalSecond)}</p>
+          <p>집중력: ${diary.focusPercent}%</p>
         </div>
       `;
+
       li.addEventListener("click", () => {
-        const detail = li.querySelector(".record-detail");
-        detail.classList.toggle("active");
+        li.querySelector(".record-detail").classList.toggle("active");
       });
+
       list.appendChild(li);
     });
 
@@ -52,6 +59,23 @@ async function loadFocusRecords() {
     list.innerHTML = "<p>기록을 불러오지 못했습니다.</p>";
   }
 }
+
+// 시간 형식 변환 유틸
+function formatDate(dateString) {
+  if (!dateString) return "-";
+  const d = new Date(dateString);
+  return `${d.getHours().toString().padStart(2, '0')}:${d.getMinutes().toString().padStart(2, '0')}`;
+}
+
+// 초 단위를 시:분:초로 변환
+function formatSeconds(seconds) {
+  if (!seconds) return "-";
+  const hrs = Math.floor(seconds / 3600);
+  const mins = Math.floor((seconds % 3600) / 60);
+  const secs = seconds % 60;
+  return `${hrs.toString().padStart(2,'0')}:${mins.toString().padStart(2,'0')}:${secs.toString().padStart(2,'0')}`;
+}
+
 
 // ✅ 훈련 시작 버튼 클릭
 async function startTraining() {
