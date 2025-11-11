@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -97,9 +98,15 @@ public class FocusService {
             })
             .toList();
 
-
-        System.out.println(lists.toString());
-
         return ResponseEntity.ok(ApiResponse.ok("훈련 기록 조회 성공",lists));
+    }
+
+    @Transactional
+    public ResponseEntity<ApiResponse<Void>> deleteRecord(Long diaryId) {
+        FocusDiary diary = focusDiaryRepository.findById(diaryId)
+                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND));
+        focusDiaryRepository.delete(diary);
+
+        return ResponseEntity.ok(ApiResponse.ok("기록 삭제 성공"));
     }
 }

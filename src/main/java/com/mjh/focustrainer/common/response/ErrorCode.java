@@ -7,6 +7,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum ErrorCode {
 
+    //훈련 관련 3000번대
+    NOT_FOUND("3000", "해당 훈련 기록이 존재하지 않습니다."),
+
     // 인증 관련 2000번대
     MAIL_SEND_FAILED("2000", "메일 발송 중 오류가 발생했습니다."),
     VERIFICATION_FAILED("2001", "인증번호가 일치하지 않습니다."),

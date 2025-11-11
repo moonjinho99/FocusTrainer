@@ -34,8 +34,11 @@ async function loadFocusRecords() {
       li.classList.add("record-item");
       li.innerHTML = `
         <div class="record-summary">
-          <strong>${diary.name}</strong>
-          <span>${new Date(diary.createdAt).toLocaleDateString()}</span>
+          <div>
+            <strong>${diary.name}</strong>
+            <span>${new Date(diary.createdAt).toLocaleDateString()}</span>
+          </div>
+          <button class="delete-btn" onclick="deleteRecord(${diary.diaryId})">삭제</button>
         </div>
 
         <div class="record-detail">
@@ -47,7 +50,8 @@ async function loadFocusRecords() {
         </div>
       `;
 
-      li.addEventListener("click", () => {
+      li.addEventListener("click", e => {
+        if (e.target.classList.contains("delete-btn")) return;
         li.querySelector(".record-detail").classList.toggle("active");
       });
 
@@ -57,6 +61,32 @@ async function loadFocusRecords() {
   } catch (error) {
     console.error(error);
     list.innerHTML = "<p>기록을 불러오지 못했습니다.</p>";
+  }
+}
+
+// ✅ 기록 삭제
+async function deleteRecord(diaryId) {
+  if (!confirm("정말 삭제하시겠습니까?")) return;
+
+  const token = localStorage.getItem("accessToken");
+
+  try {
+    const res = await fetch(`/api/focus/${diaryId}`, {
+      method: "DELETE",
+      headers: { "Authorization": `Bearer ${token}` }
+    });
+
+    if (!res.ok) {
+      alert("삭제 실패");
+      return;
+    }
+
+    alert("삭제되었습니다.");
+    loadFocusRecords(); // 다시 목록 새로고침
+
+  } catch (err) {
+    console.error(err);
+    alert("서버 오류가 발생했습니다.");
   }
 }
 

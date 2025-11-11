@@ -36,4 +36,11 @@ public class FocusController {
         return focusService.getRecords(request);
     }
 
+
+    @Operation(summary = "훈련 기록 삭제", description = "훈련 기록을 조회합니다.")
+    @DeleteMapping("/{diaryId}")
+    public ResponseEntity<ApiResponse<Void>> deleteFocusRecord(@PathVariable("diaryId") Long diaryId)
+    {
+        return focusService.deleteRecord(diaryId);
+    }
 }
